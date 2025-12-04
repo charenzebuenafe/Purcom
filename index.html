@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Buenafe, Charenze Jan N. | Resume Dashboard</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen p-4 sm:p-8 text-white">
+
+  <div id="app" class="max-w-6xl mx-auto bg-black rounded-3xl shadow-2xl shadow-white/5 overflow-hidden border border-neutral-800">
+    <!-- Content injected by JS -->
+  </div>
+
+  <script>
+    // --- FULL ICONS OBJECT (must exist otherwise JS will error) ---
+    const icons = {
+      Mail: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-white"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
+      Phone: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-white"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 3.08 2h3a2 2 0 0 1 2 1.72 17.5 17.5 0 0 0 .4 2.37c-.64 2.1-1.22 3.93-1.8 5.48.58.12 1.16.27 1.74.45 2.15.69 4.3 1.07 6.45 1.15 1.55.58 3.38 1.16 5.48 1.8.76.16 1.54.29 2.37.4A2 2 0 0 1 22 16.92z"/></svg>`,
+      MapPin: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-white"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`,
+      Briefcase: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-white"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 2a2 2 0 0 0-2 2v1H8V4a2 2 0 0 0-2-2"/></svg>`,
+      GraduationCap: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-white"><path d="M21.42 10.99 12 1.5 2.58 10.99c-.48.45-1.12.72-1.78.72H1v9.79a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2v-9.79h-.79c-.66 0-1.3-.27-1.78-.72zM12 1.5v22"/><path d="M14 18v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2"/></svg>`,
+      Sparkles: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-white"><path d="M12 2v2M4.93 4.93l1.41 1.41M2 12h2M4.93 19.07l1.41-1.41M12 22v-2M19.07 19.07l-1.41-1.41M22 12h-2M19.07 4.93l-1.41 1.41M16 12l-4 4-4-4 4-4 4 4z"/></svg>`,
+      Heart: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-neutral-300 flex-shrink-0 animated-pulse"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5L12 21l7-7z"/></svg>`,
+      Share2: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 text-white"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98"/><path d="M15.41 6.51l-6.82 3.98"/></svg>`,
+      Github: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 mr-4 text-white"><path d="M15 22s-4-4-6-6M9 18a2 2 0 0 1-2-2V8l-3 3M22 10a10 10 0 1 1-20 0 10 10 0 0 1 20 0z"/></svg>`,
+      Facebook: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 mr-4 text-white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>`,
+      ChevronsRight: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 mr-3 text-white"><path d="m13 17 5-5-5-5"/><path d="m6 17 5-5-5-5"/></svg>`,
+    };
+
+    // --- USER DATA ---
+    const userData = {
+      name: "Buenafe, Charenze Jan N.",
+      title: "INFORMATION TECHNOLOGY / FRONT-END DEVELOPER",
+      summary: "Highly motivated and results-oriented BSIT Student with 2 years of experience in java, SQL, HTML etc.",
+      contact: [
+        { icon: 'Mail', value: "charenze16@gmail.com", label: "EMAIL" },
+        { icon: 'Phone', value: "+639542316210", label: "PHONE" },
+        { icon: 'MapPin', value: "QUEZON CITY, PHILIPPINES", label: "LOCATION" },
+      ],
+      education: [
+        { institution: "OUR LADY OR LOURDES SCHOOL OF NOVALICHES", degree: "ICT", years: "2022 - 2024", grade: "WITH HONORS" },
+        { institution: "NEW ERA UNIVERSITY", degree: "B.S. INFORMATION TECHNOLOGY", years: "2024 - 2028", grade: "EXPECTED GRAD." },
+      ],
+      skills: {
+        languages: ["JAVASCRIPT", "HTML", "SQL"],
+        frameworks: ["NODE.JS"],
+        tools: ["INTELLIJ", "VS CODE"],
+      },
+      hobbies: ["MUSIC PRODUCTION","COMPETITIVE GAMING","COOKING","3D MODELING"],
+      social: [
+        { name: "GITHUB", icon: 'Github', url: "https://github.com/charenzebuenafe" },
+        { name: "FACEBOOK", icon: 'Facebook', url: "https://www.facebook.com/charenze.buenafe.1" },
+      ]
+    };
+
+    const tabs = [
+      { label: 'EDUCATION', icon: 'GraduationCap' },
+      { label: 'SKILLS', icon: 'Sparkles' },
+      { label: 'HOBBIES', icon: 'Heart' },
+      { label: 'SOCIAL LINKS', icon: 'Share2' },
+    ];
+    let activeTab = 'EDUCATION';
+
+    // --- RENDER HELPERS ---
+    function renderContactItem(item) {
+      return `
+        <div class="flex items-center text-xs sm:text-sm space-x-2 text-white/90">
+          ${icons[item.icon]}
+          <div class='uppercase tracking-widest'>
+            <span class="font-bold text-neutral-400">${item.label}: </span>
+            <span class="text-white">${item.value}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderHeader() {
+      const contactHtml = userData.contact.map(renderContactItem).join('');
+      return `
+        <header class="bg-black text-white p-6 sm:p-10 border-b-2 border-white">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div class="flex items-center gap-6">
+              <div class="relative group">
+                <div class="absolute -inset-0.5 bg-white rounded-full opacity-50 blur group-hover:opacity-100 transition duration-500"></div>
+                <!-- direct img src: profile.jpg -->
+                <img src="profile.jpg" alt="Profile" class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-black object-cover bg-neutral-900 p-2">
+              </div>
+              <div>
+                <h1 class="text-3xl sm:text-5xl font-extrabold tracking-widest text-white uppercase glow-text">${userData.name}</h1>
+                <p class="text-md sm:text-xl font-light text-neutral-400 mt-2 uppercase tracking-wide border-l-2 border-white pl-3">${userData.title}</p>
+              </div>
+            </div>
+
+            <div class="flex flex-col space-y-2 mt-6 sm:mt-0 w-full sm:w-auto bg-neutral-900/50 p-4 rounded-lg border border-neutral-800">
+              ${contactHtml}
+            </div>
+          </div>
+
+          <div class="mt-8 p-5 bg-neutral-900/30 rounded-xl border border-white/20">
+            <h2 class="text-lg font-bold mb-3 flex items-center text-white uppercase tracking-widest glow-text">
+              ${icons['Briefcase']} PROFESSIONAL SUMMARY
+            </h2>
+            <p class="text-sm font-light leading-relaxed text-neutral-300">${userData.summary}</p>
+          </div>
+        </header>
+      `;
+    }
+
+    function renderEducationTab() {
+      return `
+        <div class="space-y-6">
+          ${userData.education.map((item) => `
+            <div class="bg-black p-5 rounded-xl border border-neutral-700 shadow-2xl transition duration-300 hover:shadow-white/20 hover:border-white group">
+              <h3 class="font-extrabold text-xl text-white uppercase group-hover:underline decoration-2 underline-offset-4">${item.degree}</h3>
+              <p class="text-sm font-light text-neutral-300 mt-1">${item.institution}</p>
+              <p class="text-xs text-neutral-500 mt-2 flex justify-between uppercase tracking-wider">
+                <span>${item.years}</span>
+                <span class="font-bold text-green-400 bg-neutral-800 px-2 py-0.5 rounded">${item.grade || ''}</span>
+              </p>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function renderSkillGroup(title, items) {
+      const skillChips = Array.isArray(items) ? items.map(item => `
+        <span class="px-4 py-1.5 bg-neutral-800 text-white text-sm font-bold rounded-full border border-neutral-600 hover:bg-white hover:text-black hover:border-white transition duration-300 uppercase cursor-default">
+          ${item}
+        </span>
+      `).join('') : '';
+
+      if (!skillChips) {
+        return `
+          <div class="p-5 bg-black rounded-xl border border-neutral-800 shadow-2xl hover:border-neutral-600 transition-colors">
+            <h3 class="text-2xl font-extrabold text-white mb-4 border-b pb-2 border-white/30 uppercase tracking-widest flex items-center">
+              ${icons['ChevronsRight']}
+              ${title}
+            </h3>
+            <p class="text-neutral-500 italic">No specific ${title.toLowerCase()} listed.</p>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="p-5 bg-black rounded-xl border border-neutral-800 shadow-2xl hover:border-neutral-600 transition-colors">
+          <h3 class="text-2xl font-extrabold text-white mb-4 border-b pb-2 border-white/30 uppercase tracking-widest flex items-center">
+            ${icons['ChevronsRight']}
+            ${title}
+          </h3>
+          <div class="flex flex-wrap gap-3">${skillChips}</div>
+        </div>
+      `;
+    }
+
+    function renderSkillsTab() {
+      return `
+        <div class="space-y-8">
+          ${renderSkillGroup("PROGRAMMING LANGUAGES", userData.skills.languages)}
+          ${renderSkillGroup("FRAMEWORKS & LIBRARIES", userData.skills.frameworks)}
+          ${renderSkillGroup("TOOLS & PLATFORMS", userData.skills.tools)}
+        </div>
+      `;
+    }
+
+    function renderHobbiesTab() {
+      return `
+        <ul class="space-y-4 p-5 bg-black rounded-xl border border-neutral-800 shadow-2xl">
+          ${userData.hobbies.map((hobby, index) => `
+            <li key=${index} class="flex items-center space-x-3 text-neutral-300 text-base border-b border-neutral-800 pb-2 last:border-b-0 last:pb-0 hover:text-white transition-colors">
+              ${icons['Heart']}
+              <span class='font-light uppercase tracking-wider'>${hobby}</span>
+            </li>
+          `).join('')}
+        </ul>
+      `;
+    }
+
+    function renderSocialTab() {
+      return `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          ${userData.social.map((link, index) => `
+            <a href="${link.url}" target="_blank" rel="noopener noreferrer"
+               class="flex items-center p-5 bg-black rounded-xl border border-neutral-700 shadow-2xl hover:shadow-white/20 hover:border-white hover:bg-neutral-900 transition duration-300 transform hover:scale-[1.03]">
+              ${icons[link.icon]}
+              <div>
+                <h3 class="font-extrabold text-xl text-white uppercase">${link.name}</h3>
+                <p class="text-xs text-neutral-400 truncate mt-1">${link.url.replace(/https?:\/\//, '')}</p>
+              </div>
+            </a>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function renderTabContent(tabName) {
+      switch (tabName) {
+        case 'EDUCATION': return renderEducationTab();
+        case 'SKILLS': return renderSkillsTab();
+        case 'HOBBIES': return renderHobbiesTab();
+        case 'SOCIAL LINKS': return renderSocialTab();
+        default: return '';
+      }
+    }
+
+    // handle tab clicks
+    window.handleTabClick = function(event) {
+      const button = event.currentTarget;
+      const newTab = button.getAttribute('data-tab');
+      if (newTab && newTab !== activeTab) {
+        activeTab = newTab;
+        renderDashboard();
+      }
+    };
+
+    function renderTabButton(tab) {
+      const isActive = activeTab === tab.label;
+      const buttonClass = isActive
+        ? 'bg-white text-black font-extrabold shadow-[0_0_15px_rgba(255,255,255,0.4)] transform translate-x-1 border border-white'
+        : 'text-neutral-400 font-semibold hover:bg-neutral-900 hover:text-white border border-transparent';
+
+      const iconSvg = icons[tab.icon];
+      const iconClassRegex = /class="[^"]*text-white[^"]*"/;
+      const replacementClass = isActive ? `class="w-5 h-5 mr-3 text-black"` : `class="w-5 h-5 mr-3 text-white"`;
+      const dynamicIcon = iconSvg.replace(iconClassRegex, replacementClass);
+
+      return `
+        <button
+          data-tab="${tab.label}"
+          onclick="handleTabClick(event)"
+          class="tab-button w-full flex items-center px-4 py-3 rounded-xl transition-all duration-300 focus:outline-none uppercase tracking-widest ${buttonClass}"
+        >
+          <span class="w-5 h-5 mr-3">${dynamicIcon}</span>
+          <span class="text-sm">${tab.label}</span>
+        </button>
+      `;
+    }
+
+    function renderDashboard() {
+      const app = document.getElementById('app');
+      const sidebarNav = tabs.map(renderTabButton).join('');
+      app.innerHTML = `
+        ${renderHeader()}
+        <div class="flex flex-col lg:flex-row">
+          <nav id="sidebar" class="p-6 lg:w-72 border-r border-neutral-800 bg-black">
+            <h3 class="text-xs uppercase font-extrabold text-white mb-4 tracking-widest border-b border-neutral-800 pb-2">MENU SECTIONS</h3>
+            <div class="space-y-3">${sidebarNav}</div>
+          </nav>
+          <main class="flex-1 p-6 sm:p-10 bg-black">
+            <h2 class="text-3xl font-extrabold text-white mb-6 border-b pb-2 border-white uppercase tracking-widest glow-text">${activeTab}</h2>
+            <div id="tab-content" class="min-h-[400px]">${renderTabContent(activeTab)}</div>
+          </main>
+        </div>
+      `;
+    }
+
+    window.onload = renderDashboard;
+  </script>
+</body>
